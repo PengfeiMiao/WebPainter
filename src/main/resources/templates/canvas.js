@@ -7,7 +7,6 @@ var mousedown, mouseout;
 var shape = 1;
 var myCans = document.getElementById("myCans");
 
-// ´´½¨Í¼ÐÎ¶ÔÏó£¬±£´æ¸ÃÍ¼ÐÎµÄ¿ªÊ¼¡¢½áÊø×ø±êÒÔ¼°Ïà¹ØÊôÐÔ
 function create_shape(Shape, startx, starty, endx, endy) {
     var color = cxt.strokeStyle.toString();
     var size = cxt.lineWidth;
@@ -25,29 +24,29 @@ function create_shape(Shape, startx, starty, endx, endy) {
 }
 
 
-//µã»÷»­²¼£¬»ñÈ¡ÆðÊ¼×ø±ê£¬ÓÉÓÚ¼ÓÁË±êÌâÀ¸£¬×ø±ê´æÔÚÒ»¸öÆ«ÒÆÁ¿
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ê£¬ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½Ë±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½
 function StartPos(e) {
     mousedown = 0;
     mouseout = 0;
     var rect = canvas.getBoundingClientRect();
     startX = e.clientX - rect.left * (canvas.width / rect.width);
     startY = e.clientY - rect.top * (canvas.height / rect.height);
-    //Èç¹ûÊÇÈÎÒâÏß£¬´´½¨¸Ã¶ÔÏó
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½
     if (shape == 4) {
         create_shape(4, startX, startY, endX, endY);
         shapes[shapes.length - 1].x.push(startX);
         shapes[shapes.length - 1].y.push(startY);
     }
-    //Èç¹ûÊÇÏðÆ¤²Á£¬µ÷ÓÃ²Á³ý¹¦ÄÜº¯Êý
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½
     if (shape == 5) {
         delete_picture();
     }
-    //±£´æµ±Ç°»­Ãæ
+    //ï¿½ï¿½ï¿½æµ±Ç°ï¿½ï¿½ï¿½ï¿½
     data = cxt.getImageData(0, 0, canvas.width, canvas.height);
 }
 
 
-// »ñÈ¡ÖÕµã×ø±ê
+// ï¿½ï¿½È¡ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
 function EndPos(e) {
     if (startX != null) {
         var rect = canvas.getBoundingClientRect();
@@ -57,10 +56,10 @@ function EndPos(e) {
 }
 
 
-// ËÉ¿ªÊó±ê
+// ï¿½É¿ï¿½ï¿½ï¿½ï¿½
 function Mouseup() {
     if (startX != null && endX != null && shape != 5 && shape != 4 && !(mousedown == 1 && mouseout == 1)) {
-        //´´½¨¸ÃÍ¼ÐÎ¶ÔÏó£¬²¢±£´æÏà¹ØÊôÐÔ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Î¶ï¿½ï¿½ó£¬²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         create_shape(shape, startX, startY, endX, endY);
         endX = null;
     }
@@ -68,61 +67,61 @@ function Mouseup() {
 }
 
 
-// °´ÏÂÊó±ê
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function Mousedown() {
-    //Èç¹ûÊó±êÊÇÔÚ»­²¼Íâ°´ÏÂµÄ£¬mousedown=1
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½â°´ï¿½ÂµÄ£ï¿½mousedown=1
     if (mouseout == 1)
         mousedown = 1;
 }
 
-// Êó±êÒÆ³öÁË»­²¼£¬mouseout=1
+// ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½mouseout=1
 function MouseOut() {
     mouseout = 1;
 }
 
-// Ñ¡Ôñ»­Ö±Ïß
+// Ñ¡ï¿½ï¿½Ö±ï¿½ï¿½
 function line() {
     shape = 1;
 }
 
-// Ñ¡Ôñ»­Ô²
+// Ñ¡ï¿½ï¿½Ô²
 function circle() {
     shape = 2
 }
 
-// Ñ¡Ôñ»­¾ØÐÎ
+// Ñ¡ï¿½ñ»­¾ï¿½ï¿½ï¿½
 function rectangle() {
     shape = 3;
 }
 
-// Ñ¡Ôñ»­×ÔÓÉÏß
+// Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function pencil() {
     shape = 4;
 }
 
-// Ñ¡ÔñÏðÆ¤²Á
+// Ñ¡ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½
 function rubber() {
     shape = 5;
 }
 
-// Êó±êÒÆ¶¯¹ý³ÌÖÐ»­»­
+// ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½
 function draw() {
-    // Èç¹ûÆðÊ¼×ø±ê²»Îª¿Õ¶øÇÒ²»ÊÇÏðÆ¤²Á×´Ì¬
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ê²»Îªï¿½Õ¶ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½×´Ì¬
     if (startX != null && shape != 5) {
-        //Èç¹û²»ÊÇÈÎÒâÏß×´Ì¬£¬Çå¿Õµ±Ç°»­²¼£¬Õ¹Ê¾ÉÏÒ»¸ö»­²¼×´Ì¬
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Õµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
         if (shape != 4) {
             cxt.clearRect(0, 0, canvas.width, canvas.height);
             cxt.putImageData(data, 0, 0);
         }
-        //µ÷ÓÃ»­Í¼º¯Êý»­Í¼
+        //ï¿½ï¿½ï¿½Ã»ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
         draw_picture(shape, startX, startY, endX, endY);
     }
 }
 
-// »­Í¼
+// ï¿½ï¿½Í¼
 function draw_picture(Shape, startx, starty, endx, endy) {
     switch (Shape) {
-        case 1://Ö±Ïß
+        case 1://Ö±ï¿½ï¿½
             cxt.beginPath();
             cxt.moveTo(startx, starty);
             cxt.lineTo(endx, endy);
@@ -136,25 +135,25 @@ function draw_picture(Shape, startx, starty, endx, endy) {
             cxt.stroke();
             cxt.closePath();
             break;
-        case 3://¾ØÐÎ
+        case 3://ï¿½ï¿½ï¿½ï¿½
             cxt.beginPath();
             cxt.rect(startx, starty, endx - startx, endy - starty);
             cxt.stroke();
             cxt.closePath();
             break;
-        case 4://ÈÎÒâÏß
+        case 4://ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             draw_pencil();
     }
 }
 
-//»­ÈÎÒâÏß
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function draw_pencil() {
-    //Èç¹û²»ÊÇÏðÆ¤²Á×´Ì¬£¬¼ÇÂ¼×ß¹ýµÄÎ»ÖÃ×ø±ê
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ß¹ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if (shape !== 5) {
         shapes[shapes.length - 1].x.push(endX);
         shapes[shapes.length - 1].y.push(endY);
     }
-    //»­ÈÎÒâÏß
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     cxt.beginPath();
     cxt.lineJoin = "round";
     cxt.moveTo(startX, startY);
@@ -165,22 +164,22 @@ function draw_pencil() {
     startY = endY;
 }
 
-//ÏðÆ¤²Á¹¦ÄÜº¯Êý£¬ÕâÀïÏðÆ¤²ÒµÄ¹¦ÄÜÊÇÉ¾³ýµã»÷Î»ÖÃËù´æÔÚµÄÍ¼ÐÎ¶ÔÏó
+//ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ÒµÄ¹ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Í¼ï¿½Î¶ï¿½ï¿½ï¿½
 function delete_picture() {
-    cxt.clearRect(0, 0, canvas.width, canvas.height);	// Çå³ý»­²¼
-    var list = new Array();// ÓÃlist¼ÇÂ¼ÐèÒªÉ¾³ýµÄ¶ÔÏóµÄÏÂ±ê
-    var current_size = cxt.lineWidth;// ÓÃcurrent_size¼ÇÂ¼µ±Ç°µÄlineWidth
+    cxt.clearRect(0, 0, canvas.width, canvas.height);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    var list = new Array();// ï¿½ï¿½listï¿½ï¿½Â¼ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½
+    var current_size = cxt.lineWidth;// ï¿½ï¿½current_sizeï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½ï¿½lineWidth
     for (var j = 0 in shapes) {
-        var isPointIn = -1;// ±êÖ¾¸ÃµãÊÇ·ñ´æÔÚµ±Ç°¶ÔÏóÖÐ
+        var isPointIn = -1;// ï¿½ï¿½Ö¾ï¿½Ãµï¿½ï¿½Ç·ï¿½ï¿½ï¿½Úµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         var Error = judgeError(shapes[j].size);
         switch (shapes[j].Shape) {
-            case 1: // Ö±Ïß
-                //ÅÐ¶Ïµãµ½Ö±ÏßµÄ¾àÀë
+            case 1: // Ö±ï¿½ï¿½
+                //ï¿½Ð¶Ïµãµ½Ö±ï¿½ßµÄ¾ï¿½ï¿½ï¿½
                 var a = shapes[j].endy - shapes[j].starty;
                 var b = shapes[j].startx - shapes[j].endx;
                 var c = -shapes[j].endy * shapes[j].startx + shapes[j].endx * shapes[j].starty;
                 var distance = Math.pow((a * startX + b * startY + c), 2) / (Math.pow(a, 2) + Math.pow(b, 2));
-                //Èç¹û¸Ã¾àÀëÐ¡ÓÚ2£¬ÔòÊÓÎª¸ÃµãÔÚÖ±ÏßÉÏ£¬É¾³ý¸Ã¶ÔÏó£¬·ñÔò»­³ö¸ÃÖ±Ïß
+                //ï¿½ï¿½ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ãµï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Ï£ï¿½É¾ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ó£¬·ï¿½ï¿½ò»­³ï¿½ï¿½ï¿½Ö±ï¿½ï¿½
                 if (distance < (Error * Error)) {
                     isPointIn = 1;
                     break;
@@ -192,7 +191,7 @@ function delete_picture() {
                 var x1 = shapes[j].startx, y1 = shapes[j].starty, x2 = shapes[j].endx, y2 = shapes[j].endy;
                 var radius = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
                 cxt.arc(shapes[j].startx, shapes[j].starty, radius, 0, Math.PI * 2, true);
-                // ÅÐ¶Ï¸Ãµãµ½Ô²ÐÄµÄ¾àÀë£¬Óë°ë¾¶½øÐÐ±È½Ï
+                // ï¿½Ð¶Ï¸Ãµãµ½Ô²ï¿½ÄµÄ¾ï¿½ï¿½ë£¬ï¿½ï¿½ë¾¶ï¿½ï¿½ï¿½Ð±È½ï¿½
                 var distance = Math.sqrt(Math.pow((x1 - startX), 2) + Math.pow((y1 - startY), 2));
                 if (distance <= radius + Error && distance >= radius - Error) {
                     isPointIn = 1;
@@ -200,8 +199,8 @@ function delete_picture() {
                 }
                 isPointIn = 0;
                 break;
-            case 3://¾ØÐÎ
-                // ÅÐ¶Ï¸ÃµãÊÇ·ñÔÚ¾ØÐÎ±ßÉÏ£¬ÔÚÔòÉ¾³ý¸Ã¶ÔÏó£¬¼ÇÂ¼ÏÂ±ê£¬·ñÔò»­³ö¸Ã¾ØÐÎ
+            case 3://ï¿½ï¿½ï¿½ï¿½
+                // ï¿½Ð¶Ï¸Ãµï¿½ï¿½Ç·ï¿½ï¿½Ú¾ï¿½ï¿½Î±ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ó£¬¼ï¿½Â¼ï¿½Â±ê£¬ï¿½ï¿½ï¿½ò»­³ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½
                 var y1 = Math.max(shapes[j].endy, shapes[j].starty);
                 var y2 = Math.min(shapes[j].endy, shapes[j].starty);
                 var x1 = Math.max(shapes[j].startx, shapes[j].endx);
@@ -223,7 +222,7 @@ function delete_picture() {
             case 4:
                 cxt.beginPath();
                 var k;
-                //ÒÀ´ÎÈ¡³öÈÎÒâÏß¹ì¼£ÖÐµÄÏàÁÚÁ½µã£¬²¢ÇÒÒÔÕâÁ½µãÎª¶Ô½Ç¶¥µã£¬×ö¾ØÐÎ
+                //ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¹ì¼£ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ô½Ç¶ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 for (k = 0; k < shapes[j].x.length - 1; k++) {
                     var y1 = Math.max(shapes[j].y[k], shapes[j].y[k + 1]);
                     var y2 = Math.min(shapes[j].y[k], shapes[j].y[k + 1]);
@@ -231,7 +230,7 @@ function delete_picture() {
                     var x2 = Math.min(shapes[j].x[k], shapes[j].x[k + 1]);
                     cxt.rect(shapes[j].x[k], shapes[j].y[k], shapes[j].x[k + 1]
                         - shapes[j].x[k], shapes[j].y[k + 1] - shapes[j].y[k]);
-                    //Èç¹û¸ÃµãÔÚÕâ¸ö¾ØÐÎÖÐ£¬ÔòÊÓÎª¸ÃµãÔÚÕâ¸ö¶ÔÏóÉÏ£¬É¾³ý¶ÔÏó
+                    //ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     if (startX <= x1 && startX >= x2 && startY <= y1 && startY >= y2) {
                         k = -1;
                         break;
@@ -246,7 +245,7 @@ function delete_picture() {
                     list.push(j);
                     break;
                 }
-                //¸Ãµã²»ÔÚ¶ÔÏóÉÏ£¬ÉèÖÃµ±Ç°»­²¼ÊôÐÔÓë¸Ã¶ÔÏóÒ»ÖÂ£¬»­³ö¸ÃÈÎÒâÏß
+                //ï¿½Ãµã²»ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½Ò»ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 else {
                     cxt.lineWidth = shapes[j].size;
                     cxt.strokeStyle = shapes[j].color;
@@ -259,7 +258,7 @@ function delete_picture() {
                     }
                 }
         }
-        //Èç¹û¸ÃÍ¼ÐÎ²»ÊÇÈÎÒâÏß£¬ÇÒ¸Ãµã²»ÔÚ¶ÔÏóÉÏ£¬ÉèÖÃµ±Ç°»­²¼ÊôÐÔÓë¸Ã¶ÔÏóÒ»ÖÂ£¬»­³ö¸ÃÍ¼ÐÎ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½ï¿½Ò¸Ãµã²»ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½Ò»ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
         if (isPointIn === 0 && shapes[j].Shape !== 4) {
             cxt.lineWidth = shapes[j].size;
             cxt.strokeStyle = shapes[j].color;
@@ -269,18 +268,18 @@ function delete_picture() {
             list.push(j);
         }
     }
-    //É¾³ý¸ÃµãËù¾­¹ýµÄ¶ÔÏó
+    //É¾ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
     for (k = 0; k < list.length; k++) {
         var n = list[k] - k;
         shapes.splice(n, 1);
     }
-    //»Ö¸´µ±Ç°»­²¼ÊôÐÔµ½Ê¹ÓÃÏðÆ¤²ÁÖ®Ç°
+    //ï¿½Ö¸ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½Ê¹ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½Ö®Ç°
     cxt.strokeStyle = document.getElementById("color").value;
     cxt.lineWidth = current_size;
 }
 
 
-//ÅÐ¶Ïµ±Ç°»­±Ê´ÖÏ¸£¬À´¾ö¶¨ÏðÆ¤²ÁµÄÎó²î
+//ï¿½Ð¶Ïµï¿½Ç°ï¿½ï¿½ï¿½Ê´ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function judgeError(num) {
     switch (num) {
         case 1:
@@ -299,11 +298,11 @@ function judgeError(num) {
 }
 
 
-//Çå³ý»­²¼
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function clear() {
-    // ÌáÊ¾¸Ã²Ù×÷²»¿ÉÄæ
+    // ï¿½ï¿½Ê¾ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     var reminder = confirm("The operation is irreversible!");
-    // Èç¹ûÈ·ÈÏÒªÇå³ý£¬³õÊ¼»¯½çÃæ
+    // ï¿½ï¿½ï¿½È·ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if (reminder) {
         cxt.clearRect(0, 0, canvas.width, canvas.height);
         endX = null;
@@ -311,16 +310,16 @@ function clear() {
     }
 }
 
-//ÉèÖÃ±Ê»­´ÖÏ¸
+//ï¿½ï¿½ï¿½Ã±Ê»ï¿½ï¿½ï¿½Ï¸
 function line_Width(new_width) {
     cxt.lineWidth = new_width;
 }
 
-//±£´æµ±Ç°»­²¼
+//ï¿½ï¿½ï¿½æµ±Ç°ï¿½ï¿½ï¿½ï¿½
 function reserve() {
-    //Çå¿Õlocalstorage
+    //ï¿½ï¿½ï¿½localstorage
     localStorage.clear();
-    //°Ñµ±Ç°¶ÔÏó±£´æµ½localstorage
+    //ï¿½Ñµï¿½Ç°ï¿½ï¿½ï¿½ó±£´æµ½localstorage
     for (var j = 0 in shapes) {
         var json = JSON.stringify(shapes[j]);
         localStorage.setItem(j.toString(), json);
@@ -328,17 +327,17 @@ function reserve() {
 }
 
 
-//´ò¿ªÖ®Ç°±£´æµÄ»­²¼
+//ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
 function open() {
-    //Çå¿Õ»­²¼£¬Çå¿Õ¶ÔÏó
+    //ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½
     cxt.clearRect(0, 0, canvas.width, canvas.height);
     shapes = [];
-    //°ÑlocastoragµÄ¶ÔÏóÌí¼Óµ½µ±Ç°µÄ¶ÔÏó×é
+    //ï¿½ï¿½locastoragï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ç°ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½
     for (var j = 0; j < localStorage.length; j++) {
         var json = localStorage.getItem(j.toString());
         shapes[j] = JSON.parse(json);
     }
-    // ÔÚ»­²¼ÉÏÊä³öÕâÐ©¶ÔÏó
+    // ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½
     for (var j = 0 in localStorage) {
         cxt.strokeStyle = shapes[j].color;
         cxt.lineWidth = shapes[j].size;
@@ -347,17 +346,17 @@ function open() {
 }
 
 
-//²Ëµ¥À¸µÄÏìÓ¦Ê½Éè¼Æ
+//ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦Ê½ï¿½ï¿½ï¿½
 document.getElementById("color").onchange = function () {
     cxt.strokeStyle = this.value
 };
 var x = document.getElementsByName("shape");
-// ÓÃshape_click¼ÇÂ¼µ±Ç°±»Ñ¡ÖÐµÄ°´Å¥£¬Ä¬ÈÏÎªÖ±Ïß£¬Ö±ÏßµÄ±³¾°ÉèÎªpink
+// ï¿½ï¿½shape_clickï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½ï¿½Ñ¡ï¿½ÐµÄ°ï¿½Å¥ï¿½ï¿½Ä¬ï¿½ï¿½ÎªÖ±ï¿½ß£ï¿½Ö±ï¿½ßµÄ±ï¿½ï¿½ï¿½ï¿½ï¿½Îªpink
 var shape_click = 0;
 x[0].style.background = "pink";
 for (var j = 0; j < x.length; j++) {
     var select_shape = j;
-    //µ±Êó±êÒÆµ½Í¼ÐÎÑ¡ÏîÉÏÊ±£¬±³¾°É«±ä³ÉÀ¶É«
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Í¼ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½É«
     x[j].onmouseover = (function (select_shape) {
         return function () {
             var Select = select_shape;
@@ -365,7 +364,7 @@ for (var j = 0; j < x.length; j++) {
                 this.style.background = "skyblue";
         }
     })(select_shape);
-    //µ±Êó±êÀë¿ªÊ±£¬»Ö¸´Ô­À´µÄ±³¾°É«
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¿ªÊ±ï¿½ï¿½ï¿½Ö¸ï¿½Ô­ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½É«
     x[j].onmouseout = (function (select_shape) {
         var Select = select_shape;
         return function () {
@@ -373,7 +372,7 @@ for (var j = 0; j < x.length; j++) {
                 this.style.background = "black";
         }
     })(select_shape);
-    //µ±Ñ¡ÖÐ¸ÃÍ¼ÐÎÑ¡ÏîÊ±£¬±³¾°É«±äÎª·ÛÉ«
+    //ï¿½ï¿½Ñ¡ï¿½Ð¸ï¿½Í¼ï¿½ï¿½Ñ¡ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½Îªï¿½ï¿½É«
     x[j].onclick = (function (select_shape) {
         var Select = select_shape;
         return function () {
@@ -385,7 +384,7 @@ for (var j = 0; j < x.length; j++) {
 }
 
 
-//µ±Í¼ÐÎÑ¡Ïî¸Ä±äÊ±£¬»Ö¸´ÉÏÒ»¸ö±»Ñ¡ÖÐÑ¡ÏîµÄ±³¾°É«
+//ï¿½ï¿½Í¼ï¿½ï¿½Ñ¡ï¿½ï¿½Ä±ï¿½Ê±ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ñ¡ï¿½ï¿½Ä±ï¿½ï¿½ï¿½É«
 function recover(shape_num) {
     document.getElementsByName("shape")[shape_num].style.background = "black";
 }
