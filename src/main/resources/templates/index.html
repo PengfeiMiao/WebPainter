@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>第一个HTML页面</title>
+    <title>首页</title>
+    <link rel="stylesheet" href="/css/index.css"/>
+
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/index.js"></script>
 </head>
 <body>
 <h1>Hello Spring Boot!!!</h1>
-<p th:text="${index}"></p>
+<div class="login-title" th:text="${user}"></div>
+<button onclick="read()">click</button>
 </body>
 </html>
