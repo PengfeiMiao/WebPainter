@@ -3,13 +3,12 @@ let read = function () {
         'id': '1'
     };
 
-    let getUserById = promiseAjax('get', getUser, param).then((res) => {
+    promiseAjax('get', getUser, param).then((res) => {
+
+        $(".log").html('用户名：' + res.data["username"]);
         console.log(res);
         return res;
-    });
 
-    setTimeout(()=>{
-        console.log(getUserById.);
-    },500);
+    });
 
 };

@@ -4,15 +4,55 @@
 <head>
     <meta charset="UTF-8"/>
     <title>首页</title>
-    <link rel="stylesheet" href="/css/index.css"/>
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/canvas.css">
 
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/index.js"></script>
+
 </head>
 <body>
-<h1>Hello Spring Boot!!!</h1>
 <div class="login-title" th:text="${user}"></div>
-<button onclick="read()">click</button>
+<button onclick="upload()">click</button>
+<div class="log" ></div>
+<div id="myCans" class="mycans">
+    <br><br>
+    <form name="form1">
+        <center>
+            <div class="black">
+                <center>
+                    <span name="shape" id="Line"> Line</span>
+                    <span name="shape" id="Circle">Circle</span>
+                    <span name="shape" id="Rectangle">Rectangle</span>
+                    <span name="shape" id="Pencil">Pencil</span>
+                    <span name="shape" id="Rubber">Rubber</span>
+                </center>
+            </div>
+            <br>
+            <center>
+                <input type="button" value="open" id="Open">
+                <input type="button" value="Save" id="Reserve">
+                <input type="color" id="color">
+                <select id="linewidth" name="line_width"
+                        onchange="line_Width(form1.line_width.options[selectedIndex].value)">
+                    <option value="1" selected="selected">1px</option>
+                    <option value="3">3px</option>
+                    <option value="5">5px</option>
+                    <option value="10">10px</option>
+                    <option value="15">15px</option>
+                    <option value="20">20px</option>
+                </select>
+                <input type="button" value="clear" id="Clear">
+            </center>
+        </center>
+    </form>
+    <br><br>
+    <center>
+        <canvas id="cans" width="1300" height="500"></canvas>
+    </center>
+</div>
+<script src="/js/canvas.js"></script>
 </body>
 </html>

@@ -1,0 +1,29 @@
+.black{
+	background:black;
+	padding:8px;
+	width:500px;
+	color:white;
+}
+canvas{
+	background: white;
+}
+.mycans{
+	height:758px;	
+	background: black;
+	}
+ 
+body{
+	margin:0;
+	background: black;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+ 
+span{
+	display:inline-block;
+	width:80px;
+	cursor:pointer;
+}
