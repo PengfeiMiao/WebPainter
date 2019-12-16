@@ -15,23 +15,22 @@
 </head>
 <body>
 <div class="login-title" th:text="${user}"></div>
-<button onclick="upload()">click</button>
+<button onclick="upload()">上传</button>
+<button onclick="importing()">导入</button>
+<button onclick="download()">下载</button>
 <div class="log" ></div>
 <div id="myCans" class="mycans">
     <br><br>
-    <form name="form1">
-        <center>
-            <div class="black">
-                <center>
-                    <span name="shape" id="Line"> Line</span>
-                    <span name="shape" id="Circle">Circle</span>
-                    <span name="shape" id="Rectangle">Rectangle</span>
-                    <span name="shape" id="Pencil">Pencil</span>
-                    <span name="shape" id="Rubber">Rubber</span>
-                </center>
+    <form name="form1" style="text-align:center">
+            <div class="black" style="text-align:center">
+                <span name="shape" id="Line"> Line</span>
+                <span name="shape" id="Circle">Circle</span>
+                <span name="shape" id="Rectangle">Rectangle</span>
+                <span name="shape" id="Pencil">Pencil</span>
+                <span name="shape" id="Rubber">Rubber</span>
             </div>
             <br>
-            <center>
+            <div style="text-align:center">
                 <input type="button" value="open" id="Open">
                 <input type="button" value="Save" id="Reserve">
                 <input type="color" id="color">
@@ -45,13 +44,12 @@
                     <option value="20">20px</option>
                 </select>
                 <input type="button" value="clear" id="Clear">
-            </center>
-        </center>
+            </div>
     </form>
     <br><br>
-    <center>
+    <div style="text-align:center">
         <canvas id="cans" width="1300" height="500"></canvas>
-    </center>
+    </div>
 </div>
 <script src="/js/canvas.js"></script>
 </body>

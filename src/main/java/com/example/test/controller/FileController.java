@@ -1,17 +1,15 @@
 package com.example.test.controller;
 
 import com.example.test.bean.RespBean;
-import com.example.test.util.StringUtil;
-import com.google.gson.Gson;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+import com.example.test.entity.CommonFile;
+import com.example.test.service.impl.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author mpf
@@ -20,6 +18,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/file")
 public class FileController {
+
+    @Autowired
+    private FileService fileService;
 
     @PostMapping("/upload/image")
     public RespBean uploadImage(HttpServletRequest request) {
@@ -30,36 +31,47 @@ public class FileController {
 
         String result_msg = "";//上传结果信息
 
-        filename = StringUtil.isBlank(filename) ? file.getOriginalFilename() : filename;
-
-        if (file.getSize() / 1000 > 100) {
+        if (file == null) {
+            result_msg = "上传图片为空";
+        } else if (file.getSize() / 1000 > 100) {
             result_msg = "图片大小不能超过100KB";
         } else {
             //判断上传文件格式
             String fileType = file.getContentType();
-            if (fileType.equals("image/jpeg") || fileType.equals("image/png") || fileType.equals("image/jpeg")) {
-                // 要上传的目标文件存放的绝对路径
-                final String localPath = "D://file/upload/image";
-                //上传后保存的文件名(需要防止图片重名导致的文件覆盖)
-                //拼接文件名
-                filename += ("." + file.getContentType().split("/")[1]);
-                System.out.println(new Gson().toJson(file));
-                File tempFileParentFolder = new File(localPath).getParentFile();
-                if (!tempFileParentFolder.exists()) {
-                    tempFileParentFolder.mkdirs();
+            if (fileType.equals("image/jpeg") || fileType.equals("image/png") || fileType.equals("image/jpg")) {
+                CommonFile commonFile = new CommonFile();
+                commonFile.setFilename(filename);
+                commonFile.setCreator(creator);
+                boolean flag = fileService.uploadFile(file, commonFile);
+                if (flag) {
+                    RespBean.sendSuccessMessage("图片上传成功");
+                } else {
+                    result_msg = "图片上传失败";
                 }
-                try {
-                    file.transferTo(new File(localPath + File.separator + filename));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return RespBean.sendSuccessMessage("图片上传失败");
-                }
-                result_msg = "图片上传成功";
             } else {
                 result_msg = "图片格式不正确";
             }
         }
 
-        return RespBean.sendSuccessMessage(result_msg);
+        return RespBean.sendErrorMessage(result_msg);
+    }
+
+    /**
+     * @创建时间 2019/10/9
+     * @参数
+     * @返回值
+     * @描述 根据id下载文件
+     */
+    @GetMapping("/downloadFileById")
+    public RespBean downloadFileById(Integer id, HttpServletResponse response) {
+
+        CommonFile selected = fileService.getCommonFileById(id);
+
+        if (selected != null && selected.getFilepath() != null) {
+            fileService.downloadCommonFileOnServerDisk(selected.getFilepath(), response);
+            return RespBean.sendSuccessMessage();
+        } else {
+            return RespBean.sendErrorMessage();
+        }
     }
 }

@@ -1,14 +1,17 @@
 package com.example.test.service;
 
+import com.example.test.bean.RespBean;
+import com.example.test.entity.CommonFile;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
-/**
- * @author LogicArk
- * @date 2018/11/18
- */
 public interface IFileService {
+
+    boolean uploadFile(MultipartFile file, CommonFile commonFile);
 
     /**
      * Created by luojizhou on 2017/05/18
@@ -22,9 +25,9 @@ public interface IFileService {
      * Created by LogicArk on 2019/5/8
      * @description 下载附件
      * @param
-     * @return
+     * @returni
      */
-    void downloadAttachmentFile(String attachmentId, HttpServletResponse response);
+    void downloadAttachmentFile(String id, HttpServletResponse response);
 
 
     /**
@@ -34,4 +37,8 @@ public interface IFileService {
      * @description 删除文件夹 (删除服务器磁盘 某一个文件夹 ，如果存在则删除 ，可作为通用方法)
      */
     void deleteOneDirectoryOnDiskIfExist(File directory) throws IOException;
+
+    List<CommonFile> getCommonFileByCreator(String creator);
+
+    CommonFile getCommonFileById(Integer Id);
 }

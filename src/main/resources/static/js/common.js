@@ -1,7 +1,8 @@
-const baseURL = "http://localhost:8080/";
+const baseURL = "http://localhost:8766/";
 
 const getUser = "user/getUser";
 const uploadImage = "file/upload/image";
+const downloadImage = "file/downloadFileById";
 
 const promiseAjax = (method, api, param) => {
     return new Promise((resolve,reject) => {
@@ -19,7 +20,6 @@ const promiseAjax = (method, api, param) => {
         });
     });
 };
-
 
 let get = function (api, param) {
     $.ajax({

@@ -13,6 +13,6 @@ public class TestService implements ITestService {
 
     @Override
     public User getUserById(int id){
-        return userMapper.selectById(id);
+        return userMapper.selectByPrimaryKey(id);
     }
 }

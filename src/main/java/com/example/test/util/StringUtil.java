@@ -617,16 +617,6 @@ public class StringUtil {
         return floatList;
     }
 
-    /**
-     * String转换为xx.5或者整数格式字符串
-     *
-     * @param source
-     * @return
-     * @author mpf
-     */
-    public static String convertStringToPointFive(float source) {
-        return String.valueOf((float)Math.round(source*2)/2).replace(".0","");
-    }
 
     /**
      * 将List<Float>转换为List<String>
@@ -647,22 +637,44 @@ public class StringUtil {
     }
 
     /**
-     * 将二进制110011字符串改为十进制数字1256
+     * 驼峰模式字符串转换为下划线字符串
      *
+     * @param camelStr
      * @return
-     * @author: ltb
-     * @date 2019/11/21
-     * @params
      */
-    public static List<Integer> convertBinaryStrToNum(String str) {
-        List<Integer> list = new ArrayList<>();
-        char[] chars = str.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == 1 || chars[i] == '1') {
-                list.add(i + 1);
-            }
+    public static String camel2Underscore(String camelStr) {
+        return convertCamel(camelStr, '_');
+    }
+
+    /**
+     * 转换驼峰字符串为指定分隔符的字符串 <br/>
+     * 如：camelStr:"UserInfo"    separator:'_' <br/>
+     * return "user_info"
+     *
+     * @param camelStr  驼峰字符串
+     * @param separator 分隔符
+     * @return
+     */
+    public static String convertCamel(String camelStr, char separator) {
+        if (isBlank(camelStr)) {
+            return camelStr;
         }
-        return list;
+        StringBuilder out = new StringBuilder();
+        char[] strChar = camelStr.toCharArray();
+        for (int i = 0, len = strChar.length; i < len; i++) {
+            char c = strChar[i];
+            if (!Character.isLowerCase(c)) {
+                //如果是首字符，则不需要添加分隔符
+                if (i == 0) {
+                    out.append(Character.toLowerCase(c));
+                    continue;
+                }
+                out.append(separator).append(Character.toLowerCase(c));
+                continue;
+            }
+            out.append(c);
+        }
+        return out.toString();
     }
 
 }

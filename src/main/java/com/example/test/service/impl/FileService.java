@@ -1,24 +1,59 @@
 package com.example.test.service.impl;
 
-
+import com.example.test.entity.CommonFile;
+import com.example.test.mapper.FileMapper;
 import com.example.test.service.IFileService;
+import com.example.test.staticobject.CommonStatic;
+import com.example.test.util.StringUtil;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.Date;
+import java.util.List;
 
-
-/**
- * @author LogicArk
- * @date 2018/11/18
- */
 @Service
 public class FileService implements IFileService {
+
+    @Autowired
+    private FileMapper fileMapper;
+
+    @Override
+    public boolean uploadFile(MultipartFile file, CommonFile commonFile) {
+
+        //上传后保存的文件名(需要防止图片重名导致的文件覆盖)
+        //拼接文件名
+        String filename = StringUtil.isBlank(commonFile.getFilename()) ?
+                file.getOriginalFilename() : commonFile.getFilename();
+        filename += ("." + file.getContentType().split("/")[1]);
+        System.out.println(new Gson().toJson(file));
+        File tempFileParentFolder = new File(CommonStatic.LOCAL_PATH).getParentFile();
+        if (!tempFileParentFolder.exists()) {
+            tempFileParentFolder.mkdirs();
+        }
+        String filepath = CommonStatic.LOCAL_PATH + File.separator + filename;
+        try {
+            file.transferTo(new File(filepath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        commonFile.setFilename(filename);
+        commonFile.setFilepath(filepath);
+        commonFile.setUploadtime(new Date());
+        //保存文件信息
+        int res = fileMapper.insert(commonFile);
+        return true;
+    }
 
     /**
      * Created by luojizhou on 2017/05/18
@@ -56,9 +91,7 @@ public class FileService implements IFileService {
             else {
                 fileName = URLEncoder.encode(fileName, "UTF-8");
             }
-
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName + "");
-
 
             FileCopyUtils.copy(is, response.getOutputStream());
             // maybe cause IOException
@@ -83,6 +116,18 @@ public class FileService implements IFileService {
     @Override
     public void deleteOneDirectoryOnDiskIfExist(File directory) throws IOException {
 
+    }
+
+    @Override
+    public List<CommonFile> getCommonFileByCreator(String creator) {
+        CommonFile commonFile = new CommonFile();
+        commonFile.setCreator(creator);
+        return fileMapper.selectByCriteria(commonFile);
+    }
+
+    @Override
+    public CommonFile getCommonFileById(Integer id) {
+        return fileMapper.selectByPrimaryKey(id);
     }
 
 

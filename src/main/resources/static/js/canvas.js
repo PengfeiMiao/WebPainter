@@ -346,26 +346,6 @@ function open() {
     }
 }
 
-function upload(){
-    var image = convertCanvasToImage(canvas);
-    var formdata = new FormData();
-    formdata.append('file',new Blob([ image ], {type: "image/png"}));
-    $.ajax({
-        async: false,
-        url: baseURL + uploadImage,
-        type: 'post',
-        data: formdata,
-        contentType:false,//ajax上传图片需要添加
-        processData:false,//ajax上传图片需要添加
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (e) {
-            alert("error");
-        }
-    })
-}
-
 function b64ToUint8Array(b64Image) {
     var img = atob(b64Image.split(',')[1]);
     var img_buffer = [];
