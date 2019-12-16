@@ -34,27 +34,31 @@ function upload(){
 }
 
 function download(){
-    let param = {
-        id: 1
-    };
-    $.ajax({
-        async: false,
-        url: baseURL + downloadImage,
-        type: 'get',
-        param: param,
-        contentType: 'application/json',
-        responseType: 'blob',
-        success: function (data) {
-            let blob = data.response;
-            let a = document.createElement('a');
-            a.download = 'test.png';
-            a.href = window.URL.createObjectURL(blob);
-            a.click();
-        },
-        error: function (e) {
-            alert("error");
-        }
+
+    let id = 1;
+
+    axios({
+        method: "get",
+        url: `${baseURL}${downloadImage}?id=${id}`,
+        responseType: "arraybuffer",
+        // 这里可以在header中加一些东西，比如token
     })
+        .then(res => {
+            console.log(res);
+            // new Blob([data])用来创建URL的file对象或者blob对象
+            let url = window.URL.createObjectURL(new Blob([res.data]));
+            // 生成一个a标签
+            let link = document.createElement("a");
+            link.style.display = "none";
+            link.href = url;
+
+            link.download = res.headers["content-disposition"].split("filename=")[1];
+            document.body.appendChild(link);
+            link.click();
+        })
+        .catch(error => {
+            console.log("response: ", error);
+        });
 }
 
 function importing(){

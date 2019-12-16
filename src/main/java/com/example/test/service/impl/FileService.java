@@ -86,14 +86,14 @@ public class FileService implements IFileService {
             String firefox = "firefox";
             if (agent.toLowerCase().indexOf(firefox) > 0) {
                 fileName = new String(fileName.getBytes(), "ISO8859-1");
-            }
-            //其他浏览器
+        }
+        //其他浏览器
             else {
-                fileName = URLEncoder.encode(fileName, "UTF-8");
-            }
-            response.setHeader("Content-Disposition", "attachment;filename=" + fileName + "");
+            fileName = URLEncoder.encode(fileName, "UTF-8");
+        }
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + "");
 
-            FileCopyUtils.copy(is, response.getOutputStream());
+        FileCopyUtils.copy(is, response.getOutputStream());
             // maybe cause IOException
             response.flushBuffer();
             is.close();
