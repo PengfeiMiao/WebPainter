@@ -1,21 +1,48 @@
+//$(document).ready(function(){});
+$(document).ready(function(){
+
+    let param = {
+        creatorId: '1'
+    };
+    promiseAjax('get', filesFinder, param).then((res) => {
+        console.log(res);
+        let str = '';
+        res.forEach(item=>{
+            str += `<option value=${item.id}>${item.name}</option>`;
+        });
+        $('#file_select').append(str);
+        layui.form;
+    });
+
+
+});
+
+layui.form.on('select(myselect)', function (data) {
+    console.log(data);
+});
+
 let read = function () {
     let param = {
         'id': '1'
     };
 
-    promiseAjax('get', getUser, param).then((res) => {
+    // axios.get(`${baseURL}${getUser}`, param).then((res) => {
+    //     $(".log").html('用户名：' + res.data["username"]);
+    //     console.log(res);
+    //     return res;
+    // });
 
+    promiseAjax('get', getUser, param).then((res) => {
         $(".log").html('用户名：' + res.data["username"]);
         console.log(res);
         return res;
-
     });
 
 };
 
 function upload(){
-    var image = convertCanvasToImage(canvas);
-    var formdata = new FormData();
+    let image = convertCanvasToImage(canvas);
+    let formdata = new FormData();
     formdata.append('file',new Blob([ image ], {type: "image/png"}));
     formdata.append('filename','test');
     $.ajax({
@@ -63,21 +90,4 @@ function download(){
 }
 
 function importing(){
-    var image = convertCanvasToImage(canvas);
-    var formdata = new FormData();
-    formdata.append('file',new Blob([ image ], {type: "image/png"}));
-    $.ajax({
-        async: false,
-        url: baseURL + uploadImage,
-        type: 'post',
-        data: formdata,
-        contentType:false,//ajax上传图片需要添加
-        processData:false,//ajax上传图片需要添加
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (e) {
-            alert("error");
-        }
-    })
 }
