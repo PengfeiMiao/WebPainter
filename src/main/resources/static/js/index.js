@@ -17,6 +17,7 @@ function upload(){
     var image = convertCanvasToImage(canvas);
     var formdata = new FormData();
     formdata.append('file',new Blob([ image ], {type: "image/png"}));
+    formdata.append('filename','test');
     $.ajax({
         async: false,
         url: baseURL + uploadImage,

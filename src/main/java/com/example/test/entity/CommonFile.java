@@ -6,7 +6,8 @@ import java.util.Date;
 
 @Data
 public class CommonFile {
-    private Integer id;
+
+    private String id;
     private String filename;
     private String filepath;
     private Date uploadtime;

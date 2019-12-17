@@ -19,6 +19,11 @@
 <button onclick="upload()">上传</button>
 <button onclick="importing()">导入</button>
 <button onclick="download()">下载</button>
+<select>
+    <forEach items="${list}" var="list">
+        <option value="${list.value}" ${object.value==list.value?'selected':''}>${list.label}</option>
+    </forEach>
+</select>
 <div class="log" ></div>
 <div id="myCans" class="mycans">
     <br><br>

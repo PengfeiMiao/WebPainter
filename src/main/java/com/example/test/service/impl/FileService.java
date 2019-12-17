@@ -35,7 +35,7 @@ public class FileService implements IFileService {
                 file.getOriginalFilename() : commonFile.getFilename();
         filename += ("." + file.getContentType().split("/")[1]);
         System.out.println(new Gson().toJson(file));
-        File tempFileParentFolder = new File(CommonStatic.LOCAL_PATH).getParentFile();
+        File tempFileParentFolder = new File(CommonStatic.LOCAL_PATH);
         if (!tempFileParentFolder.exists()) {
             tempFileParentFolder.mkdirs();
         }
@@ -51,7 +51,7 @@ public class FileService implements IFileService {
         commonFile.setFilepath(filepath);
         commonFile.setUploadtime(new Date());
         //保存文件信息
-        int res = fileMapper.insert(commonFile);
+        fileMapper.save(commonFile);
         return true;
     }
 

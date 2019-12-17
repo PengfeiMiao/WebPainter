@@ -44,7 +44,7 @@ public class FileController {
                 commonFile.setCreator(creator);
                 boolean flag = fileService.uploadFile(file, commonFile);
                 if (flag) {
-                    RespBean.sendSuccessMessage("图片上传成功");
+                    return RespBean.sendSuccessMessage("图片上传成功");
                 } else {
                     result_msg = "图片上传失败";
                 }
