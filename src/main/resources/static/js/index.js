@@ -11,7 +11,9 @@ $(document).ready(function(){
             str += `<option value=${item.id}>${item.name}</option>`;
         });
         $('#file_select').append(str);
-        layui.form;
+        layui.use(['form'], function() {
+            layui.form.render();
+        });
     });
 
 
@@ -20,6 +22,7 @@ $(document).ready(function(){
 layui.form.on('select(myselect)', function (data) {
     console.log(data);
 });
+
 
 let read = function () {
     let param = {

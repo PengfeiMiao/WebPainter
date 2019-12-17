@@ -40,6 +40,7 @@ public class FileService implements IFileService {
             tempFileParentFolder.mkdirs();
         }
         String filepath = CommonStatic.LOCAL_PATH + File.separator + filename;
+        /*todo: 文件保存在当前浏览器的电脑上，待解决*/
         try {
             file.transferTo(new File(filepath));
         } catch (IOException e) {

@@ -5,26 +5,26 @@
     <meta charset="UTF-8"/>
     <title>首页</title>
 
-    <link rel="stylesheet" href="/css/layui.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/canvas.css">
+    <link rel="stylesheet" href="/layui/css/layui.css">
 
-    <script src="/js/layui.js"></script>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/layui/layui.all.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/index.js"></script>
-
+    \
 
 </head>
 <body>
-<div class="layui-form">
+<form class="layui-form">
     <div class="login-title" th:text="${user}"></div>
     <button onclick="upload()">上传</button>
     <button onclick="importing()">导入</button>
     <button onclick="download()">下载</button>
     <select name="" id="file_select" lay-filter="myselect"></select>
-</div>
+</form>
 <div id="myCans" class="mycans">
     <br><br>
     <form name="form1" style="text-align:center">
