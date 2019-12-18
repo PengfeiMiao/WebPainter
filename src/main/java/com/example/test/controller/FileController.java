@@ -57,10 +57,10 @@ public class FileController {
     }
 
     /**
-     * @创建时间 2019/10/9
-     * @参数
-     * @返回值
-     * @描述 根据id下载文件
+     *
+     * @param id
+     * @param response
+     * @return
      */
     @GetMapping("/downloadFileById")
     public RespBean downloadFileById(Integer id, HttpServletResponse response) {

@@ -14,17 +14,18 @@
     <script src="/layui/layui.all.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/index.js"></script>
-    \
 
 </head>
 <body>
-<form class="layui-form">
+<div class="layui-form">
     <div class="login-title" th:text="${user}"></div>
     <button onclick="upload()">上传</button>
     <button onclick="importing()">导入</button>
     <button onclick="download()">下载</button>
+    <input type="text" name="filename" id="filename" placeholder="输入文件名" class="layui-input">
+
     <select name="" id="file_select" lay-filter="myselect"></select>
-</form>
+</div>
 <div id="myCans" class="mycans">
     <br><br>
     <form name="form1" style="text-align:center">

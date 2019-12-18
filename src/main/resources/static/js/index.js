@@ -1,5 +1,5 @@
 //$(document).ready(function(){});
-$(document).ready(function(){
+$(function(){
 
     let param = {
         creatorId: '1'
@@ -20,7 +20,8 @@ $(document).ready(function(){
 });
 
 layui.form.on('select(myselect)', function (data) {
-    console.log(data);
+    console.log(data.value);
+    download(data.value);
 });
 
 
@@ -44,10 +45,17 @@ let read = function () {
 };
 
 function upload(){
+
+    let input = $('#filename')[0];
+    if(input.value==null || input.value===''){
+        alert("文件名为空");
+        return;
+    }
+
     let image = convertCanvasToImage(canvas);
     let formdata = new FormData();
     formdata.append('file',new Blob([ image ], {type: "image/png"}));
-    formdata.append('filename','test');
+    formdata.append('filename',input.value);
     $.ajax({
         async: false,
         url: baseURL + uploadImage,
@@ -59,14 +67,12 @@ function upload(){
             console.log(data);
         },
         error: function (e) {
-            alert("error");
+            alert(e);
         }
     })
 }
 
-function download(){
-
-    let id = 1;
+function download(id){
 
     axios({
         method: "get",
