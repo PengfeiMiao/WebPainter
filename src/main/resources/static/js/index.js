@@ -1,6 +1,11 @@
 //$(document).ready(function(){});
 $(function(){
 
+    var userInfo = localStorage.getItem('userInfo');
+    if(userInfo==null){
+        window.location.href = "/test/login";
+    }
+
     let param = {
         creatorId: '1'
     };

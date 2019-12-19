@@ -2,6 +2,8 @@ package com.example.test.service;
 
 import com.example.test.entity.User;
 
-public interface ITestService {
+public interface IUserService {
     User getUserById(int id);
+
+    User loginUser(User user);
 }
