@@ -3,6 +3,7 @@ package com.example.test.controller;
 import com.example.test.bean.RespBean;
 import com.example.test.entity.User;
 import com.example.test.service.impl.UserService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,15 @@ public class UserController {
     @PostMapping("/login")
     public RespBean login(@RequestBody User user){
         User res = userService.loginUser(user);
+        if(res == null){
+            return RespBean.sendErrorMessage();
+        }
+        return RespBean.sendSuccessMessage(res);
+    }
+
+    @PostMapping("/logout")
+    public RespBean logout(@RequestBody User user){
+        User res = userService.logoutUser(user);
         if(res == null){
             return RespBean.sendErrorMessage();
         }

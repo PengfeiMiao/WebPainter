@@ -1,9 +1,12 @@
 //$(document).ready(function(){});
 $(function(){
 
-    var userInfo = localStorage.getItem('userInfo');
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if(userInfo==null){
         window.location.href = "/test/login";
+    }else{
+       // console.log(userInfo.username);
+        $("#user_name").html(`${userInfo.username},欢迎登录！`);
     }
 
     let param = {
@@ -103,5 +106,45 @@ function download(id){
         });
 }
 
-function importing(){
+function importing(file){
+    if (!file.files || !file.files[0]) {
+        return;
+    }
+    let reader = new FileReader();
+    reader.onload = function (evt) {
+        let img = new Image();
+        img.src = evt.target.result;
+        img.id = "tmp";
+        //img.style.display = "none";
+        document.body.appendChild(img);
+        img.onload = function () {
+            convertImageToCanvas(this);
+            document.body.removeChild(img);
+        }
+    };
+    reader.readAsDataURL(file.files[0]);
+}
+
+function logout(){
+
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));;
+
+    axios.post(baseURL+userLogout, userInfo).then(res => {
+        console.log(res);
+        if(res.status === 200){
+            switch (res.data.code) {
+                case "success": {
+                    console.log(res.data.data.username);
+                    localStorage.removeItem("userInfo");
+                    window.location.href = "/test/login";
+                    break;
+                }
+                case "error": {
+                    alert(res.data.msg);
+                    break;
+                }
+                default: break;
+            }
+        }
+    });
 }

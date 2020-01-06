@@ -319,7 +319,11 @@ function line_Width(new_width) {
 //保存当前画布
 function reserve() {
     //清空localstorage
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
     localStorage.clear();
+    if(userInfo != null){
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    }
     //把当前对象保存到localstorage
     for (var j = 0 in shapes) {
         var json = JSON.stringify(shapes[j]);
@@ -359,14 +363,17 @@ function b64ToUint8Array(b64Image) {
 
 //将图片转为canvas显示
 function convertImageToCanvas(image) {
-    cxt.getContext("2d").drawImage(image, 0, 0);
-    return cxt;
+    cxt.clearRect(0, 0, canvas.width, canvas.height);
+    endX = null;
+    shapes = [];
+    cxt.drawImage(image,0,0);
+    return canvas;
 }
 
 //将canvas转为图片
 function convertCanvasToImage(canvas) {
-    var b64Image = canvas.toDataURL('image/png');
-    var u8Image  = b64ToUint8Array(b64Image);
+    let b64Image = canvas.toDataURL('image/png');
+    let u8Image  = b64ToUint8Array(b64Image);
     return u8Image;
 }
 

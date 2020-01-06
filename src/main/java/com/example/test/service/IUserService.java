@@ -6,4 +6,6 @@ public interface IUserService {
     User getUserById(int id);
 
     User loginUser(User user);
+
+    User logoutUser(User user);
 }

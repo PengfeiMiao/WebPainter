@@ -5,6 +5,7 @@ const uploadImage = "file/upload/image";
 const downloadImage = "file/downloadFileById";
 const filesFinder = "finder/filesFinder";
 const userLogin = "user/login";
+const userLogout = "user/logout";
 
 const promiseAjax = (method, api, param) => {
     return new Promise((resolve,reject) => {

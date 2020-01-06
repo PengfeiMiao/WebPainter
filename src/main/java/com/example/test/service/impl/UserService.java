@@ -23,11 +23,21 @@ public class UserService implements IUserService {
     public User loginUser(User user) {
 
         User res = userMapper.selectByUsername(user.getUsername());
-        System.out.println(res);
-        if(res != null && res.getLogin()!=1){
+        if(res != null && res.getLogin()!=1 && res.getPassword().equals(user.getPassword())){
             res.setLogin(1);
             userMapper.updateByPrimaryKey(res);
-            System.out.println(res);
+            return res;
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public User logoutUser(User user) {
+        User res = userMapper.selectByUsername(user.getUsername());
+        if(res != null && res.getLogin()!=0 && res.getPassword().equals(user.getPassword())){
+            res.setLogin(0);
+            userMapper.updateByPrimaryKey(res);
             return res;
         }else{
             return null;

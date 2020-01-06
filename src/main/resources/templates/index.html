@@ -5,9 +5,9 @@
     <meta charset="UTF-8"/>
     <title>首页</title>
 
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/canvas.css">
     <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/canvas.css">
+    <link rel="stylesheet" href="/css/index.css">
 
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/axios.min.js"></script>
@@ -17,14 +17,24 @@
 
 </head>
 <body>
-<div class="layui-form">
-    <div class="login-title" th:text="${user}"></div>
-    <button onclick="upload()">上传</button>
-    <button onclick="importing()">导入</button>
-    <button onclick="download()">下载</button>
-    <input type="text" name="filename" id="filename" placeholder="输入文件名" class="layui-input">
-
-    <select name="" id="file_select" lay-filter="myselect"></select>
+<div class="layui-form" style="background: azure">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <label class="login-title" id="user_name"></label>
+                <button onclick="logout()">退出</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <input type="text" name="filename" id="filename" placeholder="输入文件名" class="layui-input" style="width:190px">
+            </div>
+            <button onclick="upload()">上传</button>
+            <div class="layui-input-inline">
+                <select name="" id="file_select" lay-filter="myselect"></select>
+            </div>
+            <button onclick="download()">下载</button>
+            <input type="file"onchange="importing(this)"/>
+        </div>
 </div>
 <div id="myCans" class="mycans">
     <br><br>
