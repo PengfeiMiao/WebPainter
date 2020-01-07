@@ -1,7 +1,8 @@
 //$(document).ready(function(){});
+var userInfo = '';
 $(function(){
 
-    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if(userInfo==null){
         window.location.href = "/test/login";
     }else{
@@ -9,12 +10,18 @@ $(function(){
         $("#user_name").html(`${userInfo.username},欢迎登录！`);
     }
 
+    fileList(userInfo.id);
+
+});
+
+function fileList(id){
     let param = {
-        creatorId: '1'
+        creatorId: id
     };
     promiseAjax('get', filesFinder, param).then((res) => {
         console.log(res);
         let str = '';
+        $('#file_select').html("");
         res.forEach(item=>{
             str += `<option value=${item.id}>${item.name}</option>`;
         });
@@ -23,15 +30,13 @@ $(function(){
             layui.form.render();
         });
     });
-
-
-});
+}
 
 layui.form.on('select(myselect)', function (data) {
     console.log(data.value);
-    download(data.value);
+    //download(data.value);
+    $("#imageId").val(data.value);
 });
-
 
 let read = function () {
     let param = {
@@ -64,6 +69,7 @@ function upload(){
     let formdata = new FormData();
     formdata.append('file',new Blob([ image ], {type: "image/png"}));
     formdata.append('filename',input.value);
+    formdata.append('creator',userInfo.id);
     $.ajax({
         async: false,
         url: baseURL + uploadImage,
@@ -72,6 +78,8 @@ function upload(){
         contentType:false,//ajax上传图片需要添加
         processData:false,//ajax上传图片需要添加
         success: function (data) {
+            // setTimeout('window.location.reload()',1000);
+            fileList(userInfo.id);
             console.log(data);
         },
         error: function (e) {
@@ -80,7 +88,9 @@ function upload(){
     })
 }
 
-function download(id){
+function download(){
+
+    let id = $("#imageId").val();
 
     axios({
         method: "get",

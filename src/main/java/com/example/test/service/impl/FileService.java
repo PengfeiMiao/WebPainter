@@ -34,13 +34,15 @@ public class FileService implements IFileService {
         String filename = StringUtil.isBlank(commonFile.getFilename()) ?
                 file.getOriginalFilename() : commonFile.getFilename();
         filename += ("." + file.getContentType().split("/")[1]);
-        System.out.println(new Gson().toJson(file));
-        File tempFileParentFolder = new File(CommonStatic.LOCAL_PATH);
+
+        String localPath = CommonStatic.OPERATION_SYSTEM_USER_HOME + File.separator + CommonStatic.APPLICATION_NAME;
+
+        File tempFileParentFolder = new File(localPath);
         if (!tempFileParentFolder.exists()) {
             tempFileParentFolder.mkdirs();
         }
-        String filepath = CommonStatic.LOCAL_PATH + File.separator + filename;
-        /*todo: 文件保存在当前浏览器的电脑上，待解决*/
+        String filepath = localPath + File.separator + filename;
+        /*文件保存在当前浏览器的电脑上，待解决*/
         try {
             file.transferTo(new File(filepath));
         } catch (IOException e) {
@@ -87,14 +89,14 @@ public class FileService implements IFileService {
             String firefox = "firefox";
             if (agent.toLowerCase().indexOf(firefox) > 0) {
                 fileName = new String(fileName.getBytes(), "ISO8859-1");
-        }
-        //其他浏览器
+            }
+            //其他浏览器
             else {
-            fileName = URLEncoder.encode(fileName, "UTF-8");
-        }
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + "");
+                fileName = URLEncoder.encode(fileName, "UTF-8");
+            }
+            response.setHeader("Content-Disposition", "attachment;filename=" + fileName + "");
 
-        FileCopyUtils.copy(is, response.getOutputStream());
+            FileCopyUtils.copy(is, response.getOutputStream());
             // maybe cause IOException
             response.flushBuffer();
             is.close();

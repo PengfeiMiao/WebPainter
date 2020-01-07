@@ -24,18 +24,26 @@
                 <button onclick="logout()">退出</button>
             </div>
         </div>
-        <div class="layui-form-item">
-            <div class="layui-input-inline">
-                <input type="text" name="filename" id="filename" placeholder="输入文件名" class="layui-input" style="width:190px">
+        <div class="layui-form-item" style="height: 40px">
+            <div class="layui-input-block layui-inline">
+                <input type="text" name="filename" id="filename" placeholder="输入文件名" class="layui-input">
             </div>
-            <button onclick="upload()">上传</button>
-            <div class="layui-input-inline">
+            <div class="layui-inline">
+                <button onclick="upload()" class="layui-btn">上传</button>
+            </div>
+            <div class="layui-input-block layui-inline">
                 <select name="" id="file_select" lay-filter="myselect"></select>
             </div>
-            <button onclick="download()">下载</button>
-            <input type="file"onchange="importing(this)"/>
+            <div class="layui-inline">
+                <button onclick="download()" class="layui-btn">下载</button>
+            </div>
+            <div class="layui-input-block layui-inline">
+                <input type="file"onchange="importing(this)" class="layui-input"/>
+            </div>
         </div>
+
 </div>
+<input  id="imageId" value="" hidden>
 <div id="myCans" class="mycans">
     <br><br>
     <form name="form1" style="text-align:center">
