@@ -4,7 +4,7 @@ $(function(){
 
     userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if(userInfo==null){
-        window.location.href = "/test/login";
+        window.location.href = "/login";
     }else{
        // console.log(userInfo.username);
         $("#user_name").html(`${userInfo.username},欢迎登录！`);
@@ -38,25 +38,6 @@ layui.form.on('select(myselect)', function (data) {
     $("#imageId").val(data.value);
 });
 
-let read = function () {
-    let param = {
-        'id': '1'
-    };
-
-    // axios.get(`${baseURL}${getUser}`, param).then((res) => {
-    //     $(".log").html('用户名：' + res.data["username"]);
-    //     console.log(res);
-    //     return res;
-    // });
-
-    promiseAjax('get', getUser, param).then((res) => {
-        $(".log").html('用户名：' + res.data["username"]);
-        console.log(res);
-        return res;
-    });
-
-};
-
 function upload(){
 
     let input = $('#filename')[0];
@@ -78,8 +59,15 @@ function upload(){
         contentType:false,//ajax上传图片需要添加
         processData:false,//ajax上传图片需要添加
         success: function (data) {
-            // setTimeout('window.location.reload()',1000);
-            fileList(userInfo.id);
+            switch (data.code) {
+                case "success":
+                    fileList(userInfo.id);
+                    break;
+                case "error":
+                    alert(data.data);
+                    break;
+                default: break;
+            }
             console.log(data);
         },
         error: function (e) {
@@ -146,7 +134,7 @@ function logout(){
                 case "success": {
                     console.log(res.data.data.username);
                     localStorage.removeItem("userInfo");
-                    window.location.href = "/test/login";
+                    window.location.href = "/login";
                     break;
                 }
                 case "error": {

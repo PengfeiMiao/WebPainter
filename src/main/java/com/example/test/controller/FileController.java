@@ -28,13 +28,12 @@ public class FileController {
         MultipartFile file = ((MultipartHttpServletRequest) request).getFile("file");
         String filename = request.getParameter("filename");
         String creator = request.getParameter("creator");
-
-        String result_msg = "";//上传结果信息
-
+        //上传结果信息
+        String resultMsg;
         if (file == null) {
-            result_msg = "上传图片为空";
-        } else if (file.getSize() / 1000 > 100) {
-            result_msg = "图片大小不能超过100KB";
+            resultMsg = "上传图片为空";
+        } else if (file.getSize() / 1000 > 1024) {
+            resultMsg = "图片大小不能超过1MB";
         } else {
             //判断上传文件格式
             String fileType = file.getContentType();
@@ -46,14 +45,14 @@ public class FileController {
                 if (flag) {
                     return RespBean.sendSuccessMessage("图片上传成功");
                 } else {
-                    result_msg = "图片上传失败";
+                    resultMsg = "图片上传失败";
                 }
             } else {
-                result_msg = "图片格式不正确";
+                resultMsg = "图片格式不正确";
             }
         }
 
-        return RespBean.sendErrorMessage(result_msg);
+        return RespBean.sendErrorMessage(resultMsg);
     }
 
     /**

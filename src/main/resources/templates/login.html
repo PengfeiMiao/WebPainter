@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
-
     <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/login.css">
 
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/axios.min.js"></script>
@@ -13,10 +13,86 @@
     <script src="/js/login.js"></script>
 </head>
 <body>
-<div class="layui-form">
-    <input type="text" id="username" placeholder="输入用户名" class="layui-input adminInput">
-    <input type="text" id="password" placeholder="输入密码" class="layui-input">
-    <button id="login" onclick="login()" class="layui-btn">登录</button>
+<div class="wrap">
+    <img src="images/back.jpeg" class="imgStyle">
+    <div class="loginForm">
+        <form>
+            <div class="logoHead">
+                <!--<h2 style="margin-top: 15px">房产销售平台管理系统</h2>-->
+            </div>
+            <div class="usernameWrapDiv">
+                <div class="usernameLabel">
+                    <label>用户名:</label>
+                </div>
+                <div class="usernameDiv">
+                    <i class="layui-icon layui-icon-username adminIcon"></i>
+                    <input id="loginUsername" class="layui-input adminInput" type="text" name="username" placeholder="输入用户名" >
+                </div>
+            </div>
+            <div class="usernameWrapDiv">
+                <div class="usernameLabel">
+                    <label>密码:</label>
+                </div>
+                <div class="passwordDiv">
+                    <i class="layui-icon layui-icon-password adminIcon"></i>
+                    <input id="loginPassword" class="layui-input adminInput" type="password" name="password" placeholder="输入密码">
+                </div>
+            </div>
+            <div class="usernameWrapDiv">
+                <div class="usernameLabel">
+                    <label>验证码:</label>
+                </div>
+                <div class="cardDiv">
+                    <input id="loginCard" class="layui-input cardInput" type="text" name="card" placeholder="输入验证码">
+                </div>
+                <div class="codeDiv">
+                    <input id="loginCode" class="layui-input codeInput"  type="button">
+                </div>
+            </div>
+            <div class="usernameWrapDiv">
+                <div class="submitLabel">
+                    <label>没有账号？<a href="#" id="loginRegister">点击注册</a></label>
+                </div>
+                <div class="submitDiv">
+                    <input id="loginBtn" type="button" class="submit layui-btn layui-btn-primary" value="登录"></input>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+
 </body>
+<div class="registerPage">
+    <div class="registerDiv">
+        <form>
+            <div class="usernameWrapDiv">
+                <div class="usernameLabel">
+                    <label>用户名:</label>
+                </div>
+                <div class="usernameDiv">
+                    <i class="layui-icon layui-icon-username adminIcon"></i>
+                    <input id="registerUsername" class="layui-input adminInput" type="text" name="username" placeholder="输入用户名" >
+                </div>
+            </div>
+            <div class="usernameWrapDiv">
+                <div class="usernameLabel">
+                    <label>密码:</label>
+                </div>
+                <div class="passwordDiv">
+                    <i class="layui-icon layui-icon-password adminIcon"></i>
+                    <input id="registerPassword" class="layui-input adminInput" type="password" name="password" placeholder="输入密码">
+                </div>
+            </div>
+            <div class="usernameWrapDiv">
+                <div class="usernameLabel">
+                    <label>确认密码:</label>
+                </div>
+                <div class="passwordDiv">
+                    <i class="layui-icon layui-icon-password adminIcon"></i>
+                    <input id="registerWellPassword" class="layui-input adminInput" type="password" name="password" placeholder="输入密码">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </html>

@@ -20,26 +20,34 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/getUser")
-    public RespBean test(@RequestParam(value = "id") int id){
-        return RespBean.sendSuccessMessage(userService.getUserById(id));
-    }
-
     @PostMapping("/login")
-    public RespBean login(@RequestBody User user){
+    public RespBean login(@RequestBody User user) {
         User res = userService.loginUser(user);
-        if(res == null){
+        if (res == null) {
             return RespBean.sendErrorMessage();
         }
         return RespBean.sendSuccessMessage(res);
     }
 
     @PostMapping("/logout")
-    public RespBean logout(@RequestBody User user){
+    public RespBean logout(@RequestBody User user) {
         User res = userService.logoutUser(user);
-        if(res == null){
+        if (res == null) {
             return RespBean.sendErrorMessage();
         }
         return RespBean.sendSuccessMessage(res);
+    }
+
+    @PostMapping("/register")
+    public RespBean register(@RequestBody User user) {
+        User isExist = userService.getUserByName(user.getUsername());
+        if (isExist != null) {
+            return RespBean.sendErrorMessage("用户名已存在");
+        }
+        User res = userService.registerUser(user);
+        if (res == null) {
+            return RespBean.sendErrorMessage("注册失败");
+        }
+        return RespBean.sendSuccessMessage("注册成功", res);
     }
 }

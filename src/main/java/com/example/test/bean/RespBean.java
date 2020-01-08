@@ -199,6 +199,7 @@ public class RespBean {
     public static RespBean sendErrorMessage() {
         return sendErrorMessage(null);
     }
+
     public static RespBean sendErrorMessage(Object object) {
         return sendErrorMessage(ERROR, object);
     }

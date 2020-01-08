@@ -15,8 +15,8 @@ public class UserService implements IUserService {
     private UserMapper userMapper;
 
     @Override
-    public User getUserById(int id){
-        return userMapper.selectByPrimaryKey(id);
+    public User getUserByName(String username){
+        return userMapper.selectByUsername(username);
     }
 
     @Override
@@ -42,5 +42,14 @@ public class UserService implements IUserService {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public User registerUser(User user) {
+        int num = userMapper.addUser(user);
+        if(num > 0){
+            return userMapper.selectByUsername(user.getUsername());
+        }
+        return null;
     }
 }

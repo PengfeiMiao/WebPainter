@@ -26,9 +26,7 @@ public class OptionFinderService implements IOptionFinderService {
     @Override
     public List<OptionFinder> getFilesFinder(String creatorId) {
 
-        CommonFile file = new CommonFile();
-        file.setCreator(creatorId);
-        List<CommonFile> list = fileMapper.selectByCriteria(file);
+        List<CommonFile> list = fileMapper.selectFileByCreator(creatorId);
         List<OptionFinder> result = addBlankOption(true);
         for(CommonFile item : list){
             result.add(new OptionFinder(item.getId(), item.getFilename()+"_"
