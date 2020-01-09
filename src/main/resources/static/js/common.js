@@ -1,5 +1,5 @@
-const baseURL = "http://localhost:8766/";
-// const baseURL = "http://116.62.202.107:8766/";
+// const baseURL = "http://localhost:8766/";
+const baseURL = "http://116.62.202.107:8766/";
 
 const uploadImage = "file/upload/image";
 const downloadImage = "file/downloadFileById";
