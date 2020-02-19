@@ -4,6 +4,7 @@ import com.example.test.entity.CommonFile;
 import com.example.test.mapper.FileMapper;
 import com.example.test.service.IFileService;
 import com.example.test.staticobject.CommonStatic;
+import com.example.test.util.MD5Encryption;
 import com.example.test.util.StringUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +36,14 @@ public class FileService implements IFileService {
                 file.getOriginalFilename() : commonFile.getFilename();
         filename += ("." + file.getContentType().split("/")[1]);
 
-        String localPath = CommonStatic.OPERATION_SYSTEM_USER_HOME + File.separator + CommonStatic.APPLICATION_NAME;
-
+        String folderName = MD5Encryption.MD5Encode(commonFile.getCreator(), "utf-8", false);
+        String localPath = CommonStatic.OPERATION_SYSTEM_USER_HOME + File.separator + CommonStatic.APPLICATION_NAME
+                + File.separator + folderName;
         File tempFileParentFolder = new File(localPath);
         if (!tempFileParentFolder.exists()) {
             tempFileParentFolder.mkdirs();
         }
         String filepath = localPath + File.separator + filename;
-        /*文件保存在当前浏览器的电脑上，待解决*/
         try {
             file.transferTo(new File(filepath));
         } catch (IOException e) {
