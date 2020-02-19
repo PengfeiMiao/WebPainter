@@ -49,17 +49,16 @@
 <div id="myCans" class="mycans">
     <br><br>
     <form name="form1" style="text-align:center">
-            <div class="black" style="text-align:center">
+            <div class="black layui-input-block layui-inline" style="font-size:18px; text-align:center; margin-top: 5px; margin-left: 0px">
                 <span name="shape" id="Line"> Line</span>
                 <span name="shape" id="Circle">Circle</span>
                 <span name="shape" id="Rectangle">Rectangle</span>
                 <span name="shape" id="Pencil">Pencil</span>
                 <span name="shape" id="Rubber">Rubber</span>
             </div>
-            <br>
-            <div style="text-align:center">
-                <input type="button" value="open" id="Open">
-                <input type="button" value="Save" id="Reserve">
+            <div class="layui-input-block layui-inline" style="text-align:center; margin-left: 25px">
+<!--                <input type="button" value="open" id="Open">-->
+<!--                <input type="button" value="Save" id="Reserve">-->
                 <input type="color" id="color">
                 <select id="linewidth" name="line_width"
                         onchange="line_Width(form1.line_width.options[selectedIndex].value)">

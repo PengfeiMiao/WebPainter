@@ -426,8 +426,8 @@ Rectangle.addEventListener("click", rectangle, false);
 Pencil.addEventListener("click", pencil, false);
 Rubber.addEventListener("click", rubber, false);
 Clear.addEventListener("click", clear, false);
-Reserve.addEventListener("click", reserve, false);
-Open.addEventListener("click", open, false);
+// Reserve.addEventListener("click", reserve, false);
+// Open.addEventListener("click", open, false);
 
 canvas.addEventListener("mousedown", StartPos, false);
 myCans.addEventListener("mousedown", Mousedown, false);
