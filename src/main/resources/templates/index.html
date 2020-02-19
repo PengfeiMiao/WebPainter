@@ -35,9 +35,11 @@
                 <select name="" id="file_select" lay-filter="myselect"></select>
             </div>
             <div class="layui-inline">
+                <button onclick="preview()" class="layui-btn">预览</button>
                 <button onclick="download()" class="layui-btn">下载</button>
+                <label style="margin-left: 120px" class="layui-text">插入图片</label>
             </div>
-            <div class="layui-input-block layui-inline">
+            <div class="layui-input-block layui-inline" style="margin-left: 0px">
                 <input type="file"onchange="importing(this)" class="layui-input"/>
             </div>
         </div>

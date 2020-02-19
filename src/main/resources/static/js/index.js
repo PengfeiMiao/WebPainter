@@ -6,7 +6,7 @@ $(function(){
     if(userInfo==null){
         window.location.href = "/login";
     }else{
-       // console.log(userInfo.username);
+        // console.log(userInfo.username);
         $("#user_name").html(`${userInfo.username},欢迎登录！`);
     }
 
@@ -61,6 +61,7 @@ function upload(){
         success: function (data) {
             switch (data.code) {
                 case "success":
+                    alert('文件上传成功！');
                     fileList(userInfo.id);
                     break;
                 case "error":
@@ -76,6 +77,36 @@ function upload(){
     })
 }
 
+function preview() {
+    let id = $("#imageId").val();
+    axios({
+        method: "get",
+        url: `${baseURL}${downloadImage}?id=${id}`,
+        responseType: "arraybuffer",
+        // 这里可以在header中加一些东西，比如token
+    }).then(res => {
+        return 'data:image/png;base64,' + btoa(
+            new Uint8Array(res.data)
+                .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+    }).then(data => {
+        layer.open({
+            type: 1,//Page层类型
+            area: ['1200px', '600px'],
+            title: '预览图片',
+            shade: 0.6,//遮罩透明度
+            maxmin: true,//允许全屏最小化
+            anim: 1,//0-6的动画形式，-1不开启
+            content: '<img src="'+data+'"/>'
+        })
+    }).catch(e=>{
+        if(e.toString().indexOf('404')>-1){
+            alert('图片已失效！')
+        }
+    })
+
+}
+
 function download(){
 
     let id = $("#imageId").val();
@@ -85,23 +116,24 @@ function download(){
         url: `${baseURL}${downloadImage}?id=${id}`,
         responseType: "arraybuffer",
         // 这里可以在header中加一些东西，比如token
-    })
-        .then(res => {
-            console.log(res);
-            // new Blob([data])用来创建URL的file对象或者blob对象
-            let url = window.URL.createObjectURL(new Blob([res.data]));
-            // 生成一个a标签
-            let link = document.createElement("a");
-            link.style.display = "none";
-            link.href = url;
+    }).then(res => {
+        console.log(res);
+        // new Blob([data])用来创建URL的file对象或者blob对象
+        let url = window.URL.createObjectURL(new Blob([res.data]));
+        // 生成一个a标签
+        let link = document.createElement("a");
+        link.style.display = "none";
+        link.href = url;
 
-            link.download = res.headers["content-disposition"].split("filename=")[1];
-            document.body.appendChild(link);
-            link.click();
-        })
-        .catch(error => {
-            console.log("response: ", error);
-        });
+        link.download = res.headers["content-disposition"].split("filename=")[1];
+        document.body.appendChild(link);
+        link.click();
+    }).catch(error => {
+        console.log("response: ", error);
+        if(error.toString().indexOf('404')>-1){
+            alert('图片已失效！')
+        }
+    });
 }
 
 function importing(file){
